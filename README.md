@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://i.imgyukle.com/2020/05/22/yrdk3x.jpg" width="200" height="200">
+  <img src="https://forum.warezm.com/styles/warezm-logo.png" width="200" height="200">
   <h1>Turhan UserBot</h1>
 </div>
 <p align="center">
