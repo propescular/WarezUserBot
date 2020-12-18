@@ -46,7 +46,7 @@
     },
     "UPSTREAM_REPO_URL": {
       "description": "Fork sağlamanız durumunda repo URL'nizi buraya ekleyin. Varsayılan olarak kendi repo adresimiz eklidir.",
-      "value": "https://github.com/XNulI/turhanuserbot",
+      "value": "https://github.com/propescular/WarezUserBot",
       "required": true
     },
     "COUNTRY": {
