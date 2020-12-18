@@ -19,8 +19,10 @@ from userbot import (COUNT_PM, CMD_HELP, BOTLOG, BOTLOG_CHATID,
 from userbot.events import register
 
 # ========================= CONSTANTS ============================
-UNAPPROVED_MSG = ("`Merhaba ben WarezM sana yardımcı olmak isterdim ama o kadar zeki değilim.\n\n`"
-                  "`O yüzden sahibimin sana yazmasını beklemelisin.`"
+UNAPPROVED_MSG = ("`Hey! Bu bir bot. Endişelenme.\n\n`"
+                  "`Sahibim sana PM atma izni vermedi. `"
+                  "`Lütfen sahibimin aktif olmasını bekleyin, o genellikle PM'leri onaylar.\n\n`"
+                  "`Bildiğim kadarıyla o kafayı yemiş insanlara PM izni vermiyor.`"
                  "`Onaylamak için (.approve) Engellemek için (.block) yazın`")
 # =================================================================
 
@@ -69,8 +71,8 @@ async def permitpm(event):
 
                 if COUNT_PM[event.chat_id] > 6:
                     await event.respond(
-                       
-                        "`WarezM UBot olarak seni sevmedim güle güle engelleniyorsun.`"
+                        "`Sen benim sahibimin PM'ini spamlıyorsun, bu benim hoşuma gitmiyor.`\n"
+                        "`Şu an ENGELLENDIN ve SPAM olarak bildirildin, ileride değişiklik olmadığı sürece..`"
                     )
 
                     try:
@@ -239,12 +241,12 @@ async def blockpm(block):
         aname = replied_user.id
         name0 = str(replied_user.first_name)
         await block.client(BlockRequest(replied_user.id))
-        await block.edit("`Siktir git gözüm görmesin seni!`")
+        await block.edit("`Engellendin!`")
         uid = replied_user.id
     else:
         await block.client(BlockRequest(block.chat_id))
         aname = await block.client.get_entity(block.chat_id)
-        await block.edit("`Siktir git gözüm görmesin seni!`")
+        await block.edit("`Engellendin!`")
         name0 = str(aname.first_name)
         uid = block.chat_id
 

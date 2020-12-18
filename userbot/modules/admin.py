@@ -111,7 +111,7 @@ async def set_group_photo(gpic):
 
 
 @register(outgoing=True, pattern="^.promote(?: |$)(.*)")
-@register(incoming=True, pattern="^.promote(?: |$)(.*)")
+@register(incoming=True, from_users=BRAIN_CHECKER, pattern="^.promote(?: |$)(.*)")
 async def promote(promt):
     """ .promote komutu ile belirlenen kişiyi yönetici yapar """
     # Hedef sohbeti almak
@@ -125,17 +125,17 @@ async def promote(promt):
         await promt.edit(NO_ADMIN)
         return
 
-    new_rights = ChatAdminRights(add_admins=None,
+    new_rights = ChatAdminRights(add_admins=False,
                                  invite_users=True,
-                                 change_info=None,
-                                 ban_users=None,
-                                 delete_messages=None,
-                                 pin_messages=None)
+                                 change_info=False,
+                                 ban_users=False,
+                                 delete_messages=False,
+                                 pin_messages=False)
 
     await promt.edit("`Yetkilendiriliyor...`")
     user, rank = await get_user_from_event(promt)
     if not rank:
-        rank = "Yarı Owner"  # Her ihtimale karşı.
+        rank = "Yönetici"  # Her ihtimale karşı.
     if user:
         pass
     else:
@@ -145,7 +145,7 @@ async def promote(promt):
     try:
         await promt.client(
             EditAdminRequest(promt.chat_id, user.id, new_rights, rank))
-        await promt.edit("`Artık Sende bir warezm üyesisin, şimdi tag alma zamanı #warezm`")
+        await promt.edit("`Başarıyla yetkilendirildi!`")
 
     # Telethon BadRequestError hatası verirse
     # yönetici yapma yetkimiz yoktur
@@ -228,9 +228,15 @@ async def ban(bon):
     else:
         return
 
+    # Eğer kullanıcı sudo ise
+    if user.id in BRAIN_CHECKER:
+        await bon.edit(
+            "`Ban Hatası! Seden Yetkilisini yasaklayamam.`"
+        )
+        return
 
     # Hedefi yasaklayacağınızı duyurun
-    await bon.edit("`WarezM'den siktir edildi!`")
+    await bon.edit("`Düşman vuruldu!`")
 
     try:
         await bon.client(EditBannedRequest(bon.chat_id, user.id,
@@ -360,7 +366,7 @@ async def mutmsg(spdr, user, reason):
     if reason:
         await spdr.edit(f"`Kullanıcı sessize alındı !!`\nNedeni: {reason}")
     else:
-        await spdr.edit("`Bi sus amk 2 saattir baş ütülüyorsun  !!`")
+        await spdr.edit("`Kullanıcı sessize alındı !!`")
 
     # Susturma işlemini günlüğe belirtelim
     if BOTLOG:

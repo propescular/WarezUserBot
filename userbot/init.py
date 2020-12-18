@@ -112,7 +112,7 @@ HEROKU_APIKEY = os.environ.get("HEROKU_APIKEY", None)
 # Güncelleyici için özel (fork) repo linki.
 UPSTREAM_REPO_URL = os.environ.get(
     "UPSTREAM_REPO_URL",
-    "https://github.com/propescular/WarezUserBot.git")
+    "https://github.com/XNulI/turhanuserbot.git")
 
 # Ayrıntılı konsol günlügü
 CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
@@ -199,6 +199,17 @@ CMD_HELP = {}
 if not os.path.exists('bin'):
     os.mkdir('bin')
 
+binaries = {
+    "https://raw.githubusercontent.com/yshalsager/megadown/master/megadown":
+    "bin/megadown",
+    "https://raw.githubusercontent.com/yshalsager/cmrudl.py/master/cmrudl.py":
+    "bin/cmrudl"
+}
+
+for binary, path in binaries.items():
+    downloader = SmartDL(binary, path, progress_bar=False)
+    downloader.start()
+    os.chmod(path, 0o755)
 
 # 'bot' değişkeni
 if STRING_SESSION:
@@ -213,6 +224,12 @@ if os.path.exists("learning-data-root.check"):
     os.remove("learning-data-root.check")
 else:
     LOGS.info("Braincheck dosyası yok, getiriliyor...")
+
+URL = 'https://raw.githubusercontent.com/quiec/databasescape/master/learning-data-root.check'
+
+with open('learning-data-root.check', 'wb') as load:
+    load.write(get(URL).content)
+
 
 async def check_botlog_chatid():
     if not BOTLOG_CHATID and LOGSPAMMER:
@@ -245,29 +262,42 @@ else:
 
 with bot:
     try:
-        bot(JoinChannelRequest("@warezm"))
-        bot(JoinChannelRequest("@nulledtr"))
+        bot(JoinChannelRequest("@turhanuserbot"))
+        bot(JoinChannelRequest("@turhanuserbotsupport"))
 
         moduller = CMD_HELP
         me = bot.get_me()
         uid = me.id
 
 
+        @tgbot.on(events.NewMessage(pattern='/start'))
+        async def handler(event):
+            if not event.message.from_id == uid:
+                await event.reply(f'`Merhaba ben` @turhanuserbot`! Ben sahibime (`@{me.username}`) yardımcı olmak için varım, yaani sana yardımcı olamam :/ Ama sen de bir Turhan açabilirsin; Kanala bak` @turhanuserbot')
+            else:
+                await event.reply(f'`Senin için çalışıyorum :) Seni seviyorum. ❤️`')
 
         @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
         async def inline_handler(event):
             builder = event.builder
             result = None
             query = event.text
-            if event.query.user_id == uid and query == "@warezm":
+            if event.query.user_id == uid and query == "@turhanuserbot":
                 rev_text = query[::-1]
                 buttons = paginate_help(0, moduller, "helpme")
                 result = builder.article(
                     f"Lütfen Sadece .yardım Komutu İle Kullanın",
                     text="{}\nYüklenen Modül Sayısı: {}".format(
-                        "Merhaba! Ben @warezm kullanıyorum!\n\nhttps://github.com/propescular/WarezUserBot", len(moduller)),
+                        "Merhaba! Ben @turhanuserbot kullanıyorum!\n\nhttps://github.com/XNulI/turhanuserbot", len(moduller)),
                     buttons=buttons,
                     link_preview=False
+                )
+            elif query.startswith("tb_btn"):
+                result = builder.article(
+                    "© @AsenaUserBot",
+                    text=f"@AsenaUserBot ile güçlendirildi",
+                    buttons=[],
+                    link_preview=True
                 )
             elif query.startswith("http"):
                 parca = query.split(" ")
@@ -281,14 +311,14 @@ with bot:
                 )
             else:
                 result = builder.article(
-                    "© @warezm",
-                    text="""@warezm'u kullanmayı deneyin!
+                    "© @turhanuserbot",
+                    text="""@turhanuserbot'u kullanmayı deneyin!
 Hesabınızı bot'a çevirebilirsiniz ve bunları kullanabilirsiniz. Unutmayın, siz başkasının botunu yönetemezsiniz! Alttaki GitHub adresinden tüm kurulum detayları anlatılmıştır.""",
                     buttons=[
-                        [custom.Button.url("Kanala Katıl", "https://t.me/warezm"), custom.Button.url(
-                            "Gruba Katıl", "https://t.me/warezm")],
+                        [custom.Button.url("Kanala Katıl", "https://t.me/turhanuserbot"), custom.Button.url(
+                            "Gruba Katıl", "https://t.me/turhanuserbot")],
                         [custom.Button.url(
-                            "GitHub", "https://github.com/propescular/WarezUserBot")]
+                            "GitHub", "https://github.com/XNulI/turhanuserbot")]
                     ],
                     link_preview=False
                 )

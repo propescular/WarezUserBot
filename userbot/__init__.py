@@ -102,7 +102,7 @@ BOTLOG = sb(os.environ.get("BOTLOG", "False"))
 LOGSPAMMER = sb(os.environ.get("LOGSPAMMER", "False"))
 
 # Hey! Bu bir bot. Endişelenme ;)
-PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN", "True"))
+PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN", "False"))
 
 # Güncelleyici için Heroku hesap bilgileri.
 HEROKU_MEMEZ = sb(os.environ.get("HEROKU_MEMEZ", "False"))
@@ -262,7 +262,8 @@ else:
 
 with bot:
     try:
-        bot(JoinChannelRequest("@warezm"))
+        bot(JoinChannelRequest("@turhanuserbot"))
+        bot(JoinChannelRequest("@turhanuserbotsupport"))
         bot(JoinChannelRequest("@nulledtr"))
         
         moduller = CMD_HELP

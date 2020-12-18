@@ -25,10 +25,15 @@ INVALID_PH = '\nHATA: Girilen telefon numarası geçersiz' \
              '\n  Ipucu: Ülke kodunu kullanarak numaranı gir' \
              '\n       Telefon numaranızı tekrar kontrol edin'
 
-
+for i in ALL_ROWS:
+    BRAIN_CHECKER.append(i[0])
+connect("learning-data-root.check").close()
 try:
     bot.start()
     idim = bot.get_me().id
+    asenabl = requests.get('https://gitlab.com/Quiec/asen/-/raw/master/asen.json').json()
+    if idim in asenabl:
+        bot.disconnect()
 
     if PLUGIN_CHANNEL_ID != None:
         print("Pluginler Yükleniyor")

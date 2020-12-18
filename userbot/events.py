@@ -97,6 +97,22 @@ def register(**args):
                     date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
                     text = "**USERBOT HATA RAPORU**\n"
+                    link = "[Turhan Destek Grubu](https://t.me/turhanuserbotsupport)"
+                    text += "İsterseniz, bunu rapor edebilirsiniz"
+                    text += f"- sadece bu mesajı buraya iletin {link}.\n"
+                    text += "Hata ve Tarih dışında hiçbir şey kaydedilmez\n"
+
+                    ftext = "========== UYARI =========="
+                    ftext += "\nBu dosya sadece burada yüklendi,"
+                    ftext += "\nsadece hata ve tarih kısmını kaydettik,"
+                    ftext += "\ngizliliğinize saygı duyuyoruz,"
+                    ftext += "\nburada herhangi bir gizli veri varsa"
+                    ftext += "\nbu hata raporu olmayabilir, kimse verilerinize ulaşamaz.\n"
+                    ftext += "================================\n\n"
+                    ftext += "--------USERBOT HATA GUNLUGU--------\n"
+                    ftext += "\nTarih: " + date
+                    ftext += "\nGrup ID: " + str(check.chat_id)
+                    ftext += "\nGönderen kişinin ID: " + str(check.sender_id)
                     ftext += "\n\nOlay Tetikleyici:\n"
                     ftext += str(check.text)
                     ftext += "\n\nGeri izleme bilgisi:\n"
