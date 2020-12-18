@@ -5,7 +5,7 @@
   "keywords": [
     "telegram",
     "userbot",
-	"Turhan",
+  "WarezM",
     "plugin",
     "modular",
     "productivity"
@@ -16,7 +16,7 @@
   "stack": "container",
   "env": {
     "API_KEY": {
-      "description": "Bu değeri my.telegram.org adresinden alın. API_ID DEĞERİNİ ALIN",
+      "description": "Bu değeri my.telegram.org adresinden alın.",
       "required": true
     },
     "API_HASH": {
@@ -24,7 +24,15 @@
       "required": true
     },
     "PLUGIN_CHANNEL_ID": {
-      "description": "İsteğe bağlıdır, almak için @turhanuserbot",
+      "description": "İsteğe bağlıdır, almak için @AsenaKaliciPlugin",
+      "required": false
+    },
+    "SPOTIFY_DC": {
+      "description": "Spotify bio için gerekli olan anahtar",
+      "required": false
+    },
+    "SPOTIFY_KEY": {
+      "description": "Spotify bio için gerekli olan anahtar",
       "required": false
     },
     "STRING_SESSION": {
@@ -83,7 +91,7 @@
       "value": "False"
     },
     "BOT_USERNAME": {
-      "description": "Inline bot özelliğinin çalışması için gereklidir. Buraya botunuzun kullanıcı adınız yazmanız lazım (Örnek: @NaytSeydBot). Botunuz yok ise @BotFather yardımı ile bot oluşturabilirsiniz.",
+      "description": "Inline bot özelliğinin çalışması için gereklidir. Buraya botunuzun kullanıcı adınız yazmanız lazım (Örnek: @QuiecBot). Botunuz yok ise @BotFather yardımı ile bot oluşturabilirsiniz.",
       "required": false  
     },
     "BOT_TOKEN": {
@@ -109,6 +117,11 @@
     "PM_AUTO_BAN": {
       "description": "PM Otomatik Yasaklama Özelliği. 'Hey! Bu bir bot.' modülüdür.",
       "value": "True"
+    },
+    "PM_AUTO_BAN_LIMIT": {
+      "description": "PM Auto Ban limiti. Size kullanıcı x mesaj atarsa engellencek.",
+      "value": "4",
+      "required": false
     },
     "YOUTUBE_API_KEY": {
       "description": ".yt komutu için YouTube Veri API'sı keyidir. https://console.cloud.google.com adresinden alın.",
@@ -142,9 +155,29 @@
       "description": "Google Drive için client id girin.",
       "required": false
     },
+    "LASTFM_API": {
+      "description": "Last.FM modülü için API Key. [Şuradan bir tane alın - https://www.last.fm/api/account/create]",
+      "required": false
+    },
+    "LASTFM_SECRET": {
+      "description": "Last.FM modülü için SECRET Key. [Şuradan bir tane alın - https://www.last.fm/api/account/create]",
+      "required": false
+    },
+    "LASTFM_USERNAME": {
+      "description": "Last.FM Kullanıcı adı",
+      "required": false
+    },
+    "LASTFM_PASSWORD": {
+      "description": "Last.FM Şifre",
+      "required": false
+    },
+    "BIO_PREFIX": {
+      "description": "Last.FM Modülü Biyografi için önek.",
+      "required": false
+    },
     "DEFAULT_BIO": {
       "description": "Varsayılan profil biyografisi.",
-      "value": "#NoTeamJustTurhan",
+      "value": "@warezm",
       "required": false
     },
     "G_DRIVE_CLIENT_SECRET": {
@@ -159,16 +192,47 @@
       "description": "Bu modülün çalışması için CoffeeHouse API'sine ihtiyacı var. 'https://coffeehouse.intellivoid.info/dashboard' Buradan alabilirsiniz.",
       "required": false
     },
+    "WEATHER_DEFCITY": {
+      "description": "UserBot'un hava durumu modülü için varsayılan şehri ayarlayın.",
+      "required": false
+    },
     "LOGSPAMMER": {
       "description": "Hata günlüklerinin, geçerli sohbette dosyayı göndermesi yerine UserBot günlük grubunda saklanmasını istemeniz durumunda bu değeri True olarak ayarlayın. Geçerli bir BOTLOG_CHATID değerinin ayarlanmasını gerektirir.",
       "value": "False"
+    },
+    "WARN_LIMIT": {
+      "description": "Kişiyi gmutelemek/gbanlamak için gerekli uyarı sayısı. Genellikle 3 kullanılır.",
+      "value": "3",
+      "required": false
+    },
+    "WARN_MODE": {
+      "description": "3 uyarıdan sonra gerçekleşecek olay. Sadece gmute ya da gban yazabilirsiniz. Aksi takdirde bot çalışmayabilir.",
+      "value": "gmute",
+      "required": false
+    },
+    "GALERI_SURE": {
+      "description": "Galeri plugini içindir. Profil fotoğrafları kaç saniye de bir değişsin?",
+      "value": "60",
+      "required": false
+    },
+    "PAKET_ISMI": {
+      "description": "Dızla komutu paket ismini belirleyin. Paket ismi şöyle olacaktır: @KullanıcıAdın verdiğin değer 1",
+      "value": "@warezm Paketi",
+      "required": false
+    },
+    "OTOMATIK_KATILMA": {
+      "description": "Support grubuna ve Kanal'a otomatik katılmak istemiyorsanız False yazın.",
+      "value": "True",
+      "required": true
+    },
+    "LANGUAGE": {
+      "description": "Botun dili. EN/TR/AZ yazabilirsiniz.",
+      "value": "TR",
+      "required": true
     }
   },
   "addons": [{
-    "plan": "heroku-postgresql",
-    "options": {
-      "version": "9.5"
-    }
+    "plan": "heroku-postgresql"
   }],
   "buildpacks": [{
     "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
