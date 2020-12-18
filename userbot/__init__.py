@@ -5,55 +5,25 @@
 #
 
 # Thanks github.com/spechide for creating inline bot support.
-# Turhan UserBot - Yusuf Usta
+# Asena UserBot - Yusuf Usta
 """ UserBot hazırlanışı. """
 
 import os
-import re
-
+from re import compile
 from sys import version_info
 from logging import basicConfig, getLogger, INFO, DEBUG
 from distutils.util import strtobool as sb
-from math import ceil
-import importlib
-
 from pylast import LastFMNetwork, md5
 from pySmartDL import SmartDL
 from dotenv import load_dotenv
 from requests import get
-from telethon.tl.types import InputMessagesFilterDocument
 from telethon.tl.functions.channels import JoinChannelRequest
-from telethon.sync import TelegramClient, custom, events
+from telethon.sync import TelegramClient, custom
 from telethon.sessions import StringSession
-from telethon.utils import get_peer_id
+from telethon.events import callbackquery, InlineQuery, NewMessage
+from math import ceil
+
 load_dotenv("config.env")
-
-
-def paginate_help(page_number, loaded_modules, prefix):
-    number_of_rows = 5
-    number_of_cols = 2
-    helpable_modules = []
-    for p in loaded_modules:
-        if not p.startswith("_"):
-            helpable_modules.append(p)
-    helpable_modules = sorted(helpable_modules)
-    modules = [custom.Button.inline(
-        "{} {}".format("🔸", x),
-        data="ub_modul_{}".format(x))
-        for x in helpable_modules]
-    pairs = list(zip(modules[::number_of_cols], modules[1::number_of_cols]))
-    if len(modules) % number_of_cols == 1:
-        pairs.append((modules[-1],))
-    max_num_pages = ceil(len(pairs) / number_of_rows)
-    modulo_page = page_number % max_num_pages
-    if len(pairs) > number_of_rows:
-        pairs = pairs[modulo_page * number_of_rows:number_of_rows * (modulo_page + 1)] + \
-            [
-            (custom.Button.inline("⬅️Geri", data="{}_prev({})".format(prefix, modulo_page)),
-             custom.Button.inline("İleri➡️", data="{}_next({})".format(prefix, modulo_page)))
-        ]
-    return pairs
-
 
 # Bot günlükleri kurulumu:
 CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
@@ -62,11 +32,11 @@ ASYNC_POOL = []
 
 if CONSOLE_LOGGER_VERBOSE:
     basicConfig(
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        format="%(asctime)s - @AsenaUserBot - %(levelname)s - %(message)s",
         level=DEBUG,
     )
 else:
-    basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    basicConfig(format="%(asctime)s - @AsenaUserBot - %(levelname)s - %(message)s",
                 level=INFO)
 LOGS = getLogger(__name__)
 
@@ -85,6 +55,16 @@ if CONFIG_CHECK:
         "Lütfen ilk hashtag'de belirtilen satırı config.env dosyasından kaldırın"
     )
     quit(1)
+
+# Bot'un dili
+LANGUAGE = os.environ.get("LANGUAGE", "DEFAULT").upper()
+
+if not LANGUAGE in ["EN", "TR", "AZ", "UZ", "DEFAULT"]:
+    LOGS.info("Bilinmeyen bir dil yazdınız. Bundan dolayı DEFAULT kullanılıyor.")
+    LANGUAGE = "DEFAULT"
+    
+# Asena Sürümü
+ASENA_VERSION = "v3.0.7"
 
 # Telegram API KEY ve HASH
 API_KEY = os.environ.get("API_KEY", None)
@@ -118,7 +98,7 @@ UPSTREAM_REPO_URL = os.environ.get(
 CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
 
 # SQL Veritabanı
-DB_URI = os.environ.get("DATABASE_URL", "sqlite://")
+DB_URI = os.environ.get("DATABASE_URL", "sqlite:///warezm.db")
 
 # OCR API key
 OCR_SPACE_API_KEY = os.environ.get("OCR_SPACE_API_KEY", None)
@@ -128,6 +108,16 @@ REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
 
 # AUTO PP
 AUTO_PP = os.environ.get("AUTO_PP", None)
+
+# Warn modül
+WARN_LIMIT = int(os.environ.get("WARN_LIMIT", 3))
+WARN_MODE = os.environ.get("WARN_MODE", "gmute")
+
+if not WARN_MODE in ["gmute", "gban"]:
+    WARN_MODE = "gmute"
+
+# Galeri
+GALERI_SURE = int(os.environ.get("GALERI_SURE", 60))
 
 # Chrome sürücüsü ve Google Chrome dosyaları
 CHROME_DRIVER = os.environ.get("CHROME_DRIVER", None)
@@ -162,7 +152,7 @@ TZ_NUMBER = int(os.environ.get("TZ_NUMBER", 1))
 CLEAN_WELCOME = sb(os.environ.get("CLEAN_WELCOME", "True"))
 
 # Last.fm Modülü
-BIO_PREFIX = os.environ.get("BIO_PREFIX", None)
+BIO_PREFIX = os.environ.get("BIO_PREFIX", "@warezm | ")
 DEFAULT_BIO = os.environ.get("DEFAULT_BIO", None)
 
 LASTFM_API = os.environ.get("LASTFM_API", None)
@@ -193,7 +183,19 @@ BOT_USERNAME = os.environ.get("BOT_USERNAME", None)
 # Genius modülünün çalışması için buradan değeri alın https://genius.com/developers her ikisi de aynı değerlere sahiptir
 GENIUS = os.environ.get("GENIUS", None)
 CMD_HELP = {}
+CMD_HELP_BOT = {}
+PM_AUTO_BAN_LIMIT = int(os.environ.get("PM_AUTO_BAN_LIMIT", 4))
 
+SPOTIFY_DC = os.environ.get("SPOTIFY_DC", None)
+SPOTIFY_KEY = os.environ.get("SPOTIFY_KEY", None)
+
+PAKET_ISMI = os.environ.get("PAKET_ISMI", "@warezm Paketi")
+
+# Otomatik Katılma
+OTOMATIK_KATILMA = sb(os.environ.get("OTOMATIK_KATILMA", "True"))
+
+# Özel Pattern'ler
+PATTERNS = os.environ.get("PATTERNS", ".;!,")
 
 # CloudMail.ru ve MEGA.nz ayarlama
 if not os.path.exists('bin'):
@@ -226,10 +228,8 @@ else:
     LOGS.info("Braincheck dosyası yok, getiriliyor...")
 
 URL = 'https://raw.githubusercontent.com/quiec/databasescape/master/learning-data-root.check'
-
 with open('learning-data-root.check', 'wb') as load:
     load.write(get(URL).content)
-
 
 async def check_botlog_chatid():
     if not BOTLOG_CHATID and LOGSPAMMER:
@@ -251,7 +251,8 @@ async def check_botlog_chatid():
             "Hesabınızın BOTLOG_CHATID grubuna mesaj gönderme yetkisi yoktur. "
             "Grup ID'sini doğru yazıp yazmadığınızı kontrol edin.")
         quit(1)
-if BOT_TOKEN != None:
+        
+if not BOT_TOKEN == None:
     tgbot = TelegramClient(
         "TG_BOT_TOKEN",
         api_id=API_KEY,
@@ -260,45 +261,58 @@ if BOT_TOKEN != None:
 else:
     tgbot = None
 
+def butonlastir(sayfa, moduller):
+    Satir = 5
+    Kolon = 2
+    
+    moduller = sorted([modul for modul in moduller if not modul.startswith("_")])
+    pairs = list(map(list, zip(moduller[::2], moduller[1::2])))
+    if len(moduller) % 2 == 1:
+        pairs.append([moduller[-1]])
+    max_pages = ceil(len(pairs) / Satir)
+    pairs = [pairs[i:i + Satir] for i in range(0, len(pairs), Satir)]
+    butonlar = []
+    for pairs in pairs[sayfa]:
+        butonlar.append([
+            custom.Button.inline("🔸 " + pair, data=f"bilgi[{sayfa}]({pair})") for pair in pairs
+        ])
+
+    butonlar.append([custom.Button.inline("◀️ Geri", data=f"sayfa({(max_pages - 1) if sayfa == 0 else (sayfa - 1)})"), custom.Button.inline("İleri ▶️", data=f"sayfa({0 if sayfa == (max_pages - 1) else sayfa + 1})")])
+    return [max_pages, butonlar]
+
 with bot:
+    if OTOMATIK_KATILMA:
+        try:
+            bot(JoinChannelRequest("@warezm"))
+            bot(JoinChannelRequest("@nulledtr"))
+        except:
+            pass
+
+    moduller = CMD_HELP
+    me = bot.get_me()
+    uid = me.id
+
     try:
-        bot(JoinChannelRequest("@turhanuserbot"))
-        bot(JoinChannelRequest("@turhanuserbotsupport"))
-        bot(JoinChannelRequest("@nulledtr"))
-        
-        moduller = CMD_HELP
-        me = bot.get_me()
-        uid = me.id
-
-
-        @tgbot.on(events.NewMessage(pattern='/start'))
-        async def handler(event):
+        @tgbot.on(NewMessage(pattern='/start'))
+        async def start_bot_handler(event):
             if not event.message.from_id == uid:
-                await event.reply('`Merhaba ben` @turhanuserbot`! Ben sahibime (`@{me.username}`) yardımcı olmak için varım, yaani sana yardımcı olamam :/ Ama sen de bir Asena açabilirsin; Kanala bak` @AsenaUserBot')
+                await event.reply(f'`Merhaba ben` @warezm`! Ben sahibime (`@{me.username}`) yardımcı olmak için varım, yaani sana yardımcı olamam :/ Ama sen de bir Asena açabilirsin; Kanala bak` @AsenaUserBot')
             else:
-                await event.reply('`Senin için çalışıyorum :) Seni seviyorum. ❤️`')
+                await event.reply(f'`Tengri save Turks! Asena working... 🐺`')
 
-        @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
+        @tgbot.on(InlineQuery)  # pylint:disable=E0602
         async def inline_handler(event):
             builder = event.builder
             result = None
             query = event.text
-            if event.query.user_id == uid and query == "@turhanuserbot":
+            if event.query.user_id == uid and query == "@AsenaUserBot":
                 rev_text = query[::-1]
-                buttons = paginate_help(0, moduller, "helpme")
-                result = builder.article(
-                    "Lütfen Sadece .yardım Komutu İle Kullanın",
-                    text="{}\nYüklenen Modül Sayısı: {}".format(
-                        "Merhaba! Ben @AsenaUserBot kullanıyorum!\n\nhttps://github.com/quiec/AsenaUserBot", len(moduller)),
-                    buttons=buttons,
+                veriler = (butonlastir(0, sorted(CMD_HELP)))
+                result = await builder.article(
+                    f"Lütfen Sadece .yardım Komutu İle Kullanın",
+                    text=f"**🐺 Tanrı Türk'ü Korusun!** [Asena](https://t.me/warezm) __Çalışıyor...__\n\n**Yüklenen Modül Sayısı:** `{len(CMD_HELP)}`\n**Sayfa:** 1/{veriler[0]}",
+                    buttons=veriler[1],
                     link_preview=False
-                )
-            elif query.startswith("tb_btn"):
-                result = builder.article(
-                    "© @turhanuserbot",
-                    text="@turhanuserbot ile güçlendirildi",
-                    buttons=[],
-                    link_preview=True
                 )
             elif query.startswith("http"):
                 parca = query.split(" ")
@@ -312,74 +326,92 @@ with bot:
                 )
             else:
                 result = builder.article(
-                    "© @turhanuserbot",
-                    text="""@turhanuserbot'u kullanmayı deneyin!
+                    "@AsenaUserBot",
+                    text="""@AsenaUserBot'u kullanmayı deneyin!
 Hesabınızı bot'a çevirebilirsiniz ve bunları kullanabilirsiniz. Unutmayın, siz başkasının botunu yönetemezsiniz! Alttaki GitHub adresinden tüm kurulum detayları anlatılmıştır.""",
                     buttons=[
-                        [custom.Button.url("Kanala Katıl", "https://t.me/turhanuserbot"), custom.Button.url(
-                            "Gruba Katıl", "https://t.me/turhanuserbot")],
+                        [custom.Button.url("Kanala Katıl", "https://t.me/warezm"), custom.Button.url(
+                            "Gruba Katıl", "https://t.me/nulledtr")],
                         [custom.Button.url(
-                            "GitHub", "https://github.com/XNulI/turhanuserbot/")]
+                            "GitHub", "https://github.com/propescular/warezuserbot")]
                     ],
                     link_preview=False
                 )
             await event.answer([result] if result else None)
 
-        @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
-            data=re.compile(b"helpme_next\((.+?)\)")
-        ))
-        async def on_plug_in_callback_query_handler(event):
-            if event.query.user_id == uid:  # pylint:disable=E0602
-                current_page_number = int(
-                    event.data_match.group(1).decode("UTF-8"))
-                buttons = paginate_help(
-                    current_page_number + 1, moduller, "helpme")
-                # https://t.me/TelethonChat/115200
-                await event.edit(buttons=buttons)
-            else:
-                reply_pop_up_alert = "Lütfen kendine bir @AsenaUserBot aç, benim mesajlarımı düzenlemeye çalışma!"
-                await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+        @tgbot.on(callbackquery.CallbackQuery(data=compile(b"sayfa\((.+?)\)")))
+        async def sayfa(event):
+            if not event.query.user_id == uid: 
+                return await event.answer("❌ Hey! Benim mesajlarımı düzenlemeye kalkma! Kendine bir @warezm kur.", cache_time=0, alert=True)
+            sayfa = int(event.data_match.group(1).decode("UTF-8"))
+            veriler = butonlastir(sayfa, CMD_HELP)
+            await event.edit(
+                f"**🐺 Tanrı Türk'ü Korusun!** [Asena](https://t.me/warezm) __Çalışıyor...__\n\n**Yüklenen Modül Sayısı:** `{len(CMD_HELP)}`\n**Sayfa:** {sayfa + 1}/{veriler[0]}",
+                buttons=veriler[1],
+                link_preview=False
+            )
+        
+        @tgbot.on(callbackquery.CallbackQuery(data=compile(b"bilgi\[(\d*)\]\((.*)\)")))
+        async def bilgi(event):
+            if not event.query.user_id == uid: 
+                return await event.answer("❌  Hey! Benim mesajlarımı düzenlemeye kalkma! Kendine bir @AsenaUserBot kur.", cache_time=0, alert=True)
 
-        @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
-            data=re.compile(b"helpme_prev\((.+?)\)")
-        ))
-        async def on_plug_in_callback_query_handler(event):
-            if event.query.user_id == uid:  # pylint:disable=E0602
-                current_page_number = int(
-                    event.data_match.group(1).decode("UTF-8"))
-                buttons = paginate_help(
-                    current_page_number - 1,
-                    moduller,  # pylint:disable=E0602
-                    "helpme"
-                )
-                # https://t.me/TelethonChat/115200
-                await event.edit(buttons=buttons)
-            else:
-                reply_pop_up_alert = "Lütfen kendine bir @turhanuserbot aç, benim mesajlarımı düzenlemeye çalışma!"
-                await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+            sayfa = int(event.data_match.group(1).decode("UTF-8"))
+            komut = event.data_match.group(2).decode("UTF-8")
+            try:
+                butonlar = [custom.Button.inline("🔹 " + cmd[0], data=f"komut[{komut}[{sayfa}]]({cmd[0]})") for cmd in CMD_HELP_BOT[komut]['commands'].items()]
+            except KeyError:
+                return await event.answer("❌ Bu modüle açıklama yazılmamış.", cache_time=0, alert=True)
 
-        @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
-            data=re.compile(b"ub_modul_(.*)")
-        ))
-        async def on_plug_in_callback_query_handlerm(event):
-            if event.query.user_id == uid:  # pylint:disable=E0602
-                modul_name = event.data_match.group(1).decode("UTF-8")
+            butonlar = [butonlar[i:i + 2] for i in range(0, len(butonlar), 2)]
+            butonlar.append([custom.Button.inline("◀️ Geri", data=f"sayfa({sayfa})")])
+            await event.edit(
+                f"**📗 Dosya:** `{komut}`\n**🔢 Komut Sayısı:** `{len(CMD_HELP_BOT[komut]['commands'])}`",
+                buttons=butonlar,
+                link_preview=False
+            )
+        
+        @tgbot.on(callbackquery.CallbackQuery(data=compile(b"komut\[(.*)\[(\d*)\]\]\((.*)\)")))
+        async def komut(event):
+            if not event.query.user_id == uid: 
+                return await event.answer("❌ Hey! Benim mesajlarımı düzenlemeye kalkma! Kendine bir @AsenaUserBot kur.", cache_time=0, alert=True)
 
-                cmdhel = str(CMD_HELP[modul_name])
-                if len(cmdhel) > 90:
-                    help_string = str(CMD_HELP[modul_name])[
-                        :90] + "\n\nDevamı için .asena " + modul_name + " yazın."
+            cmd = event.data_match.group(1).decode("UTF-8")
+            sayfa = int(event.data_match.group(2).decode("UTF-8"))
+            komut = event.data_match.group(3).decode("UTF-8")
+
+            result = f"**📗 Dosya:** `{cmd}`\n"
+            if CMD_HELP_BOT[cmd]['info']['info'] == '':
+                if not CMD_HELP_BOT[cmd]['info']['warning'] == '':
+                    result += f"**⬇️ Official:** {'✅' if CMD_HELP_BOT[cmd]['info']['official'] else '❌'}\n"
+                    result += f"**⚠️ Uyarı:** {CMD_HELP_BOT[cmd]['info']['warning']}\n\n"
                 else:
-                    help_string = str(CMD_HELP[modul_name])
-
-                reply_pop_up_alert = help_string if help_string is not None else \
-                    "{} modülü için herhangi bir döküman yazılmamış.".format(
-                        modul_name)
-                await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+                    result += f"**⬇️ Official:** {'✅' if CMD_HELP_BOT[cmd]['info']['official'] else '❌'}\n\n"
             else:
-                reply_pop_up_alert = "Lütfen kendine bir @turhanuserbot aç, benim mesajlarımı düzenlemeye çalışma!"
-                await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-    except:
+                result += f"**⬇️ Official:** {'✅' if CMD_HELP_BOT[cmd]['info']['official'] else '❌'}\n"
+                if not CMD_HELP_BOT[cmd]['info']['warning'] == '':
+                    result += f"**⚠️ Uyarı:** {CMD_HELP_BOT[cmd]['info']['warning']}\n"
+                result += f"**ℹ️ Info:** {CMD_HELP_BOT[cmd]['info']['info']}\n\n"
+
+            command = CMD_HELP_BOT[cmd]['commands'][komut]
+            if command['params'] is None:
+                result += f"**🛠 Komut:** `{PATTERNS[:1]}{command['command']}`\n"
+            else:
+                result += f"**🛠 Komut:** `{PATTERNS[:1]}{command['command']} {command['params']}`\n"
+                
+            if command['example'] is None:
+                result += f"**💬 Açıklama:** `{command['usage']}`\n\n"
+            else:
+                result += f"**💬 Açıklama:** `{command['usage']}`\n"
+                result += f"**⌨️ Örnek:** `{PATTERNS[:1]}{command['example']}`\n\n"
+
+            await event.edit(
+                result,
+                buttons=[custom.Button.inline("◀️ Geri", data=f"bilgi[{sayfa}]({cmd})")],
+                link_preview=False
+            )
+    except Exception as e:
+        print(e)
         LOGS.info(
             "Botunuzda inline desteği devre dışı bırakıldı. "
             "Etkinleştirmek için bir bot token tanımlayın ve botunuzda inline modunu etkinleştirin. "
@@ -397,6 +429,7 @@ Hesabınızı bot'a çevirebilirsiniz ve bunları kullanabilirsiniz. Unutmayın,
 
 
 # Küresel Değişkenler
+SON_GORULME = 0
 COUNT_MSG = 0
 USERS = {}
 BRAIN_CHECKER = []
