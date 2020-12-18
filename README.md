@@ -17,7 +17,7 @@
 ### Basit Yöntem
 Eğer botu kurma hakkında fikriniz yoksa burayı okuyunuz: [Kurulum Rehberi](https://github.com/XNulI/turhanuserbot/wiki/Kurulum/)
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/XNulI/turhanuserbot)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/propescular/WarezUserBot)
 
 
 
