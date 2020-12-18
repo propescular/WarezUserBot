@@ -1,7 +1,7 @@
 {
-  "name": "TurhanUserBot",
-  "description": "Turhan UserBot",
-  "logo": "https://i.imgyukle.com/2020/05/22/yrdk3x.jpg",
+  "name": "WarezM User Bot",
+  "description": "WarezM.com",
+  "logo": "https://pbs.twimg.com/profile_images/1222496839179689985/FCFYljUq.png",
   "keywords": [
     "telegram",
     "userbot",
@@ -10,9 +10,9 @@
     "modular",
     "productivity"
   ],
-  "repository": "https://github.com/XNulI/turhanuserbot",
-  "website":   "https://google.com",
-  "success_url": "https://github.com/XNulI/turhanuserbot",
+  "repository": "https://github.com/propescular/WarezUserBot",
+  "website":   "https://forum.warezm.com",
+  "success_url": "https://github.com/propescular/WarezUserBot",
   "stack": "container",
   "env": {
     "API_KEY": {
@@ -108,7 +108,7 @@
     },
     "PM_AUTO_BAN": {
       "description": "PM Otomatik Yasaklama Özelliği. 'Hey! Bu bir bot.' modülüdür.",
-      "value": "False"
+      "value": "True"
     },
     "YOUTUBE_API_KEY": {
       "description": ".yt komutu için YouTube Veri API'sı keyidir. https://console.cloud.google.com adresinden alın.",
