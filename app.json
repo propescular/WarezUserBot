@@ -108,7 +108,7 @@
     },
     "PM_AUTO_BAN": {
       "description": "PM Otomatik Yasaklama Özelliği. 'Hey! Bu bir bot.' modülüdür.",
-      "value": "False"
+      "value": "True"
     },
     "YOUTUBE_API_KEY": {
       "description": ".yt komutu için YouTube Veri API'sı keyidir. https://console.cloud.google.com adresinden alın.",
