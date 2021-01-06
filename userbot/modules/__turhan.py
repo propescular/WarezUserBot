@@ -12,8 +12,8 @@
 from userbot import CMD_HELP
 from userbot.events import register
 
-@register(outgoing=True, pattern="^.turhan(?: |$)(.*)")
-async def turhan(event):
+@register(outgoing=True, pattern="^.warez(?: |$)(.*)")
+async def warez(event):
     """ .turhan komutu için """
     args = event.pattern_match.group(1).lower()
     if args:
@@ -23,7 +23,7 @@ async def turhan(event):
             await event.edit("Lütfen bir Turhan modülü adı belirtin.")
     else:
         await event.edit("Lütfen hangi Turhan modülü için yardım istediğinizi belirtin !!\
-            \nKullanım: .turhan <modül adı>")
+            \nKullanım: .warez <modül adı>")
         string = ""
         for i in CMD_HELP:
             string += "`" + str(i)
