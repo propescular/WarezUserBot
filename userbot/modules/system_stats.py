@@ -23,7 +23,7 @@ from userbot.events import register
 DEFAULTUSER = uname().node
 # ============================================
 
-ALIVE_MESAJ = ["İşte WareZ Karşınızda"]
+ALIVE_MESAJ = ["İşte WareZzzz Karşınızda"]
 
 @register(outgoing=True, pattern="^.sysd$")
 async def sysdetails(sysd):
