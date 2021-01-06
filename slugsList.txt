@@ -1,0 +1,100 @@
+2020-12-19T06:41:53.191163+00:00 app[worker.1]: return opener.open(url, data, timeout)
+2020-12-19T06:41:53.191163+00:00 app[worker.1]: File "/usr/lib/python3.8/urllib/request.py", line 525, in open
+2020-12-19T06:41:53.191164+00:00 app[worker.1]: response = self._open(req, data)
+2020-12-19T06:41:53.191164+00:00 app[worker.1]: File "/usr/lib/python3.8/urllib/request.py", line 542, in _open
+2020-12-19T06:41:53.191164+00:00 app[worker.1]: result = self._call_chain(self.handle_open, protocol, protocol +
+2020-12-19T06:41:53.191164+00:00 app[worker.1]: File "/usr/lib/python3.8/urllib/request.py", line 502, in _call_chain
+2020-12-19T06:41:53.191164+00:00 app[worker.1]: result = func(*args)
+2020-12-19T06:41:53.191164+00:00 app[worker.1]: File "/usr/lib/python3.8/urllib/request.py", line 1393, in https_open
+2020-12-19T06:41:53.191165+00:00 app[worker.1]: return self.do_open(http.client.HTTPSConnection, req,
+2020-12-19T06:41:53.191165+00:00 app[worker.1]: File "/usr/lib/python3.8/urllib/request.py", line 1353, in do_open
+2020-12-19T06:41:53.191165+00:00 app[worker.1]: raise URLError(err)
+2020-12-19T06:41:53.191165+00:00 app[worker.1]: urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+2020-12-19T06:48:54.000000+00:00 app[api]: Build started by user kkaradag696@gmail.com
+2020-12-19T06:50:52.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/f3e1297d-7d5a-4aad-9625-7c8ff2d1b249/activity/builds/79c31d07-abae-4374-92e1-02fb0dbbfd36
+2020-12-19T06:56:58.000000+00:00 app[api]: Build started by user kkaradag696@gmail.com
+2020-12-19T06:58:54.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/f3e1297d-7d5a-4aad-9625-7c8ff2d1b249/activity/builds/3e2442d8-817f-406a-b727-1c9f8a383f67
+2020-12-19T08:11:53.874478+00:00 app[worker.1]: 2020-12-19 11:11:53,874 - telethon.client.uploads - INFO - Uploading file of 1130 bytes in 1 chunks of 131072
+2020-12-19T08:20:35.151679+00:00 app[worker.1]: 2020-12-19 11:20:35,151 - telethon.client.uploads - INFO - Uploading file of 1274 bytes in 1 chunks of 131072
+2020-12-19T09:45:43.110485+00:00 app[worker.1]: 2020-12-19 12:45:43,110 - telethon.client.users - WARNING - Telegram is having internal issues PersistentTimestampOutdatedError: Persistent timestamp outdated (caused by GetChannelDifferenceRequest)
+2020-12-19T10:42:41.191782+00:00 app[worker.1]: 2020-12-19 13:42:41,191 - telethon.client.users - WARNING - Telegram is having internal issues PersistentTimestampOutdatedError: Persistent timestamp outdated (caused by GetChannelDifferenceRequest)
+2020-12-19T11:13:40.000000+00:00 app[api]: Build started by user kkaradag696@gmail.com
+2020-12-19T11:21:16.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/f3e1297d-7d5a-4aad-9625-7c8ff2d1b249/activity/builds/53ddb9f3-1264-4fba-96f5-d58b92029dd9
+2020-12-19T11:24:21.000000+00:00 app[api]: Build started by user kkaradag696@gmail.com
+2020-12-19T11:26:23.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/f3e1297d-7d5a-4aad-9625-7c8ff2d1b249/activity/builds/b44044c4-6780-435b-aa27-73fda3b9c2fd
+2020-12-19T11:26:29.948994+00:00 app[api]: Set UPSTREAM_REPO_URL config vars by user kkaradag696@gmail.com
+2020-12-19T11:26:29.948994+00:00 app[api]: Release v26 created by user kkaradag696@gmail.com
+2020-12-19T11:26:31.113587+00:00 heroku[worker.1]: Restarting
+2020-12-19T11:26:31.126241+00:00 heroku[worker.1]: State changed from up to starting
+2020-12-19T11:26:32.098385+00:00 heroku[worker.1]: Stopping all processes with SIGTERM
+2020-12-19T11:26:32.178497+00:00 heroku[worker.1]: Process exited with status 143
+2020-12-19T11:27:34.829666+00:00 heroku[worker.1]: Starting process with command `/bin/sh -c python3\ main.py`
+2020-12-19T11:27:35.405083+00:00 heroku[worker.1]: State changed from starting to up
+2020-12-19T11:27:37.818188+00:00 app[worker.1]: 2020-12-19 14:27:37,818 - userbot - INFO - Braincheck dosyası yok, getiriliyor...
+2020-12-19T11:27:37.847110+00:00 app[worker.1]: 2020-12-19 14:27:37,837 - telethon.network.mtprotosender - INFO - Connecting to 149.154.167.92:443/TcpFull...
+2020-12-19T11:27:37.856821+00:00 app[worker.1]: 2020-12-19 14:27:37,856 - telethon.network.mtprotosender - INFO - Connection to 149.154.167.92:443/TcpFull complete!
+2020-12-19T11:27:38.119704+00:00 app[worker.1]: 2020-12-19 14:27:38,119 - userbot - INFO - Botunuzda inline desteği devre dışı bırakıldı. Etkinleştirmek için bir bot token tanımlayın ve botunuzda inline modunu etkinleştirin. Eğer bunun dışında bir sorun olduğunu düşünüyorsanız bize ulaşın.
+2020-12-19T11:27:38.120147+00:00 app[worker.1]: 2020-12-19 14:27:38,120 - telethon.network.mtprotosender - INFO - Disconnecting from 149.154.167.92:443/TcpFull...
+2020-12-19T11:27:38.120603+00:00 app[worker.1]: 2020-12-19 14:27:38,120 - telethon.network.mtprotosender - INFO - Disconnection from 149.154.167.92:443/TcpFull complete!
+2020-12-19T11:27:38.124565+00:00 app[worker.1]: 2020-12-19 14:27:38,124 - userbot - INFO - Yüklenecek modüller: ['__helpme', '__plugin', '__turhan', 'admin', 'afk', 'anti_spambot', 'auto', 'blacklist', 'chat', 'deepfry', 'direct_links', 'filter', 'gdrive', 'github', 'hash', 'locks', 'lyrics', 'memes', 'misc', 'notes', 'ocr', 'pmpermit', 'port_hack', 'port_plane', 'profile', 'purge', 'remove_bg', 'reverse', 'rgb', 'scrapers', 'scrapers_bot', 'screencapture', 'sed', 'spammer', 'stickers', 'system_stats', 'tagall', 'updater', 'upload_download', 'welcomes', 'whois', 'www']
+2020-12-19T11:27:38.125449+00:00 app[worker.1]: 2020-12-19 14:27:38,125 - telethon.network.mtprotosender - INFO - Connecting to 149.154.167.92:443/TcpFull...
+2020-12-19T11:27:38.144363+00:00 app[worker.1]: 2020-12-19 14:27:38,144 - telethon.network.mtprotosender - INFO - Connection to 149.154.167.92:443/TcpFull complete!
+2020-12-19T11:27:38.164139+00:00 app[worker.1]: 2020-12-19 14:27:38,163 - telethon.network.mtprotosender - INFO - Received response without parent request: b'\x15\xc4\xb5\x1c\x01\x00\x00\x00\xc1X\x84\x93{\x1c\x00\x02\xa8\x15q!x\xffI\x8c\xe6$\x16D\x05xNull\x00\x00\x08hirosiri\x00\x00\x00\x0c905304731710\x00\x00\x00\x8c]\xd7\xec\xb9\xa71\x1b\xa8\x15q!\xcd\xc6\x7f\xbcw\x99C\']\x00\x00\x00\xf5|\x00\x00\xcd\xc6\x7f\xbcw\x99C\']\x00\x00\x00\xf7|\x00\x00\x04\x00\x00\x00?p\x8c\x007\xe3\xdd_\x01(<\'\xaa\xe3\xdd_\x16\x00\x00\x00\x14\x00\x00\x00Y\xb4\xd6b\x15\xc4\xb5\x1c\x01\x00\x00\x00(\xact"\xaa\xe3\xdd_\xb4SX8\x8f\x18\xecr\x86R\xca\x9b\xc1}\xa1\x81'
+2020-12-19T11:27:39.275227+00:00 app[worker.1]: /root/turhanbot/userbot/modules/memes.py:919: SyntaxWarning: "is" with a literal. Did you mean "=="?
+2020-12-19T11:27:39.275271+00:00 app[worker.1]: if len(args) is 0:
+2020-12-19T11:27:39.275272+00:00 app[worker.1]: /root/turhanbot/userbot/modules/memes.py:922: SyntaxWarning: "is" with a literal. Did you mean "=="?
+2020-12-19T11:27:39.275273+00:00 app[worker.1]: elif len(args) is 1:
+2020-12-19T11:27:39.275273+00:00 app[worker.1]: /root/turhanbot/userbot/modules/memes.py:929: SyntaxWarning: "is" with a literal. Did you mean "=="?
+2020-12-19T11:27:39.275274+00:00 app[worker.1]: elif len(args) is 2:
+2020-12-19T11:27:39.275285+00:00 app[worker.1]: 2020-12-19 14:27:39,274 - userbot - INFO - Botunuz çalışıyor! Herhangi bir sohbete .alive yazarak Test edin. Yardıma ihtiyacınız varsa, Destek grubumuza gelin t.me/turhanuserbotsupport
+2020-12-19T11:27:39.275296+00:00 app[worker.1]: 2020-12-19 14:27:39,275 - userbot - INFO - Bot sürümünüz Turhan v1
+2020-12-19T11:27:41.000000+00:00 app[api]: Build started by user kkaradag696@gmail.com
+2020-12-19T11:29:40.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/f3e1297d-7d5a-4aad-9625-7c8ff2d1b249/activity/builds/3f5eb165-341b-4a45-9442-5161ad4eb50c
+2020-12-19T11:39:52.437898+00:00 heroku[router]: at=error code=H14 desc="No web processes running" method=GET path="/" host=turhan.herokuapp.com request_id=b1da2942-c08e-4721-be1f-6874f5f9dbfe fwd="88.246.194.245" dyno= connect= service= status=503 bytes= protocol=https
+2020-12-19T11:39:53.287882+00:00 heroku[router]: at=error code=H14 desc="No web processes running" method=GET path="/favicon.ico" host=turhan.herokuapp.com request_id=d224fc12-f479-48de-810d-25888c4f45a1 fwd="88.246.194.245" dyno= connect= service= status=503 bytes= protocol=https
+2020-12-19T11:40:20.800680+00:00 heroku[worker.1]: Restarting
+2020-12-19T11:40:20.832125+00:00 heroku[worker.1]: State changed from up to starting
+2020-12-19T11:40:21.687337+00:00 heroku[worker.1]: Stopping all processes with SIGTERM
+2020-12-19T11:40:21.774281+00:00 heroku[worker.1]: Process exited with status 143
+2020-12-19T11:40:56.412713+00:00 heroku[worker.1]: Starting process with command `/bin/sh -c python3\ main.py`
+2020-12-19T11:40:57.039827+00:00 heroku[worker.1]: State changed from starting to up
+2020-12-19T11:41:00.295557+00:00 app[worker.1]: 2020-12-19 14:41:00,295 - userbot - INFO - Braincheck dosyası yok, getiriliyor...
+2020-12-19T11:41:00.317852+00:00 app[worker.1]: 2020-12-19 14:41:00,317 - telethon.network.mtprotosender - INFO - Connecting to 149.154.167.92:443/TcpFull...
+2020-12-19T11:41:00.336151+00:00 app[worker.1]: 2020-12-19 14:41:00,335 - telethon.network.mtprotosender - INFO - Connection to 149.154.167.92:443/TcpFull complete!
+2020-12-19T11:41:00.561422+00:00 app[worker.1]: 2020-12-19 14:41:00,561 - userbot - INFO - Botunuzda inline desteği devre dışı bırakıldı. Etkinleştirmek için bir bot token tanımlayın ve botunuzda inline modunu etkinleştirin. Eğer bunun dışında bir sorun olduğunu düşünüyorsanız bize ulaşın.
+2020-12-19T11:41:00.561809+00:00 app[worker.1]: 2020-12-19 14:41:00,561 - telethon.network.mtprotosender - INFO - Disconnecting from 149.154.167.92:443/TcpFull...
+2020-12-19T11:41:00.562173+00:00 app[worker.1]: 2020-12-19 14:41:00,562 - telethon.network.mtprotosender - INFO - Disconnection from 149.154.167.92:443/TcpFull complete!
+2020-12-19T11:41:00.566321+00:00 app[worker.1]: 2020-12-19 14:41:00,566 - userbot - INFO - Yüklenecek modüller: ['__helpme', '__plugin', '__turhan', 'admin', 'afk', 'anti_spambot', 'auto', 'blacklist', 'chat', 'deepfry', 'direct_links', 'filter', 'gdrive', 'github', 'hash', 'locks', 'lyrics', 'memes', 'misc', 'notes', 'ocr', 'pmpermit', 'port_hack', 'port_plane', 'profile', 'purge', 'remove_bg', 'reverse', 'rgb', 'scrapers', 'scrapers_bot', 'screencapture', 'sed', 'spammer', 'stickers', 'system_stats', 'tagall', 'updater', 'upload_download', 'welcomes', 'whois', 'www']
+2020-12-19T11:41:00.567209+00:00 app[worker.1]: 2020-12-19 14:41:00,567 - telethon.network.mtprotosender - INFO - Connecting to 149.154.167.92:443/TcpFull...
+2020-12-19T11:41:00.585482+00:00 app[worker.1]: 2020-12-19 14:41:00,585 - telethon.network.mtprotosender - INFO - Connection to 149.154.167.92:443/TcpFull complete!
+2020-12-19T11:41:02.258765+00:00 app[worker.1]: /root/turhanbot/userbot/modules/memes.py:919: SyntaxWarning: "is" with a literal. Did you mean "=="?
+2020-12-19T11:41:02.258784+00:00 app[worker.1]: if len(args) is 0:
+2020-12-19T11:41:02.258785+00:00 app[worker.1]: /root/turhanbot/userbot/modules/memes.py:922: SyntaxWarning: "is" with a literal. Did you mean "=="?
+2020-12-19T11:41:02.258785+00:00 app[worker.1]: elif len(args) is 1:
+2020-12-19T11:41:02.258785+00:00 app[worker.1]: /root/turhanbot/userbot/modules/memes.py:929: SyntaxWarning: "is" with a literal. Did you mean "=="?
+2020-12-19T11:41:02.258786+00:00 app[worker.1]: elif len(args) is 2:
+2020-12-19T11:41:02.258807+00:00 app[worker.1]: 2020-12-19 14:41:02,258 - userbot - INFO - Botunuz çalışıyor! Herhangi bir sohbete .alive yazarak Test edin. Yardıma ihtiyacınız varsa, Destek grubumuza gelin t.me/turhanuserbotsupport
+2020-12-19T11:41:02.258862+00:00 app[worker.1]: 2020-12-19 14:41:02,258 - userbot - INFO - Bot sürümünüz Turhan v1
+2020-12-19T11:43:34.000000+00:00 app[api]: Build started by user kkaradag696@gmail.com
+2020-12-19T11:45:28.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/f3e1297d-7d5a-4aad-9625-7c8ff2d1b249/activity/builds/5a7bcc9b-d449-4228-93b9-9d845899d46e
+2020-12-19T12:02:50.000000+00:00 app[api]: Build started by user kkaradag696@gmail.com
+2020-12-19T12:04:54.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/f3e1297d-7d5a-4aad-9625-7c8ff2d1b249/activity/builds/fbf3123f-3ff0-43c5-a0a8-cc802157da3e
+2020-12-19T12:09:22.000000+00:00 app[api]: Build started by user kkaradag696@gmail.com
+2020-12-19T12:11:17.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/f3e1297d-7d5a-4aad-9625-7c8ff2d1b249/activity/builds/04077a9c-2be1-469b-9da0-ccdd42d99008
+2020-12-19T12:12:41.610172+00:00 app[api]: Starting process with command `bash` by user kkaradag696@gmail.com
+2020-12-19T12:12:41.641278+00:00 heroku[run.2655]: State changed from starting to complete
+2020-12-19T12:15:03.282073+00:00 heroku[router]: at=error code=H14 desc="No web processes running" method=GET path="/" host=turhan.herokuapp.com request_id=8d6a54f2-a0ca-46a0-b344-ba39dcc406e8 fwd="88.246.194.245" dyno= connect= service= status=503 bytes= protocol=https
+2020-12-19T12:15:04.032089+00:00 heroku[router]: at=error code=H14 desc="No web processes running" method=GET path="/favicon.ico" host=turhan.herokuapp.com request_id=9651b8d0-1a69-4b50-b5de-fea82dfb277a fwd="88.246.194.245" dyno= connect= service= status=503 bytes= protocol=https
+2020-12-19T12:15:33.283118+00:00 app[api]: Starting process with command `bash` by user kkaradag696@gmail.com
+2020-12-19T12:15:33.296717+00:00 heroku[run.3270]: State changed from starting to complete
+2020-12-19T12:18:46.564688+00:00 app[api]: Starting process with command `bash` by user kkaradag696@gmail.com
+2020-12-19T12:18:46.581302+00:00 heroku[run.8626]: State changed from starting to complete
+2020-12-19T12:19:18.511462+00:00 app[api]: Starting process with command `bash` by user kkaradag696@gmail.com
+2020-12-19T12:19:18.548346+00:00 heroku[run.9496]: State changed from starting to complete
+2020-12-19T12:20:58.136567+00:00 app[api]: Starting process with command `bash` by user kkaradag696@gmail.com
+2020-12-19T12:20:58.155135+00:00 heroku[run.4081]: State changed from starting to complete
+2020-12-19T12:21:25.931322+00:00 app[api]: Starting process with command `bash` by user kkaradag696@gmail.com
+2020-12-19T12:21:25.988918+00:00 heroku[run.8916]: State changed from starting to complete
+2020-12-19T12:21:40.141923+00:00 app[api]: Starting process with command `bash` by user kkaradag696@gmail.com
+2020-12-19T12:21:40.210879+00:00 heroku[run.7300]: State changed from starting to complete
+2020-12-19T12:30:57.088883+00:00 heroku[router]: at=error code=H14 desc="No web processes running" method=GET path="/" host=turhan.herokuapp.com request_id=bd22d73b-7c10-4cf9-aaf3-c957b7bce58b fwd="88.246.194.245" dyno= connect= service= status=503 bytes= protocol=https
