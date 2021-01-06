@@ -140,5 +140,5 @@ CMD_HELP.update(
     \nKullanım: Pip modüllerinde arama yapar."})
 CMD_HELP.update({
     "alive": ".alive\
-    \nKullanım: Turhan botunun çalışıp çalışmadığını kontrol etmek için kullanılır."
+    \nKullanım: WarezUserBot botunun çalışıp çalışmadığını kontrol etmek için kullanılır."
 })
