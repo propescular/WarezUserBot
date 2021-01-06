@@ -19,11 +19,9 @@ from userbot import (COUNT_PM, CMD_HELP, BOTLOG, BOTLOG_CHATID,
 from userbot.events import register
 
 # ========================= CONSTANTS ============================
-UNAPPROVED_MSG = ("`Hey! Bu bir bot. Endişelenme.\n\n`"
-                  "`Sahibim sana PM atma izni vermedi. `"
-                  "`Lütfen sahibimin aktif olmasını bekleyin, o genellikle PM'leri onaylar.\n\n`"
-                  "`Bildiğim kadarıyla o kafayı yemiş insanlara PM izni vermiyor.`"
-                 "`Onaylamak için (.approve) Engellemek için (.block) yazın`")
+UNAPPROVED_MSG = (
+                  "`WarezM User Bot tarafından beklemeye alındın lütfen cevap alana kadar yazma.\n\n`"
+                 "`Eminim kısa süre içinde sana cevap verecektir.`")
 # =================================================================
 
 
